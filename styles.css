@@ -1,0 +1,371 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+    padding: 20px;
+}
+
+#game-container, #skill-tree-container {
+    background-color: #1e1e1e;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #edff00;
+    text-shadow: 0 0 10px rgb(214 255 0 / 70%);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #da00ff;
+    text-shadow: 0 0 10px rgb(229 0 255 / 70%);
+}
+
+
+button {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: #003333;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 5px;
+    transition: all 0.3s;
+    margin-top: 1rem;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+button:hover {
+    background-color: #004d4d;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+button:disabled {
+    background-color: #1a1a1a;
+    border-color: #4d4d4d;
+    color: #4d4d4d;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.hidden {
+    display: none;
+}
+
+#result-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#result-text {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #00ffff;
+}
+
+#character-info {
+    margin-bottom: 1rem;
+    color: #00ffff;
+}
+
+#xp-bar-container {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+#xp-bar {
+    width: 0;
+    height: 100%;
+    background-color: #1eff00;
+    transition: width 0.5s ease-in-out;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+}
+
+#so-close-overlay {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 0, 0.2);
+    color: #ffff00;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.7);
+}
+
+#so-close-overlay.visible {
+    opacity: 1;
+}
+
+#skill-tree {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.skill-branch {
+    width: 48%;
+    margin-bottom: 1rem;
+}
+
+.skill-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-button {
+    margin: 0.25rem 0;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    text-align: left;
+    background-color: #2a2a2a;
+    color: #ff00e9;
+    border: 1px solid #ed00ff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-shadow: 0 0 5px rgb(210 0 255 / 70%);
+}
+
+.skill-button:hover:not(:disabled) {
+    background-color: #330030;
+    box-shadow: 0 0 10px rgb(255 0 241 / 50%);
+}
+
+.skill-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.skill-button.unlocked {
+    background-color: #630066;
+    color: #de75ff;
+    box-shadow: 0 0 15px rgb(199 0 255 / 70%);
+}
+
+.skill-button.locked {
+    background-color: #1a1a1a;
+    color: #4d4d4d;
+    border-color: #4d4d4d;
+}
+
+.completion-message {
+    background-color: #1e1e1e;
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.completion-message h3 {
+    color: #00ffff;
+    margin-top: 0;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.game-completion {
+    background-color: #006666;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+}
+
+.game-completion h2 {
+    color: #ffff00;
+    margin-top: 0;
+    text-shadow: 0 0 15px rgba(255, 255, 0, 0.7);
+}
+
+@keyframes growShrink {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+}
+
+#result-text {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    color: #00ffff;
+}
+
+.result-item {
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.result-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.xp-number {
+    color: #02ff00;
+    font-weight: bold;
+    display: inline-block;
+    text-shadow: 0 0 10px rgb(0 255 57 / 70%);
+}
+
+.xp-number.animate {
+    animation: growShrink 0.5s ease-in-out;
+}
+
+@keyframes undulate {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.skill-button.available-skill {
+    animation: undulate 1.5s ease-in-out infinite;
+    box-shadow: 0 0 20px rgb(255 0 241 / 70%);
+    border: 2px solid #ff00fa;
+}
+
+.skill-button.available-skill:hover {
+    animation: none;
+    transform: scale(1.05);
+}
+
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #00ffff;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+
+#next-level-button {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#next-level-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0,255,255,0.7) 0%, rgba(0,255,255,0) 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+#next-level-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
+}
+
+#next-level-button:hover::before {
+    opacity: 1;
+}
+
+#next-level-button.pressed {
+    transform: scale(0.95);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.spark-container {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.spark {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #ff8d00;
+    border-radius: 50%;
+    opacity: 1;
+    animation: spark-fly 0.5s ease-out forwards;
+    box-shadow: 0 0 5px rgb(255 188 0 / 70%);
+}
+
+@keyframes spark-fly {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(cos(var(--angle)) * var(--speed)), calc(sin(var(--angle)) * var(--speed)));
+        opacity: 0;
+    }
+}
+
+
+/* ... (testing) */
+
+.game-completion {
+    background-color: #ffd700;
+    color: #000;
+    border: 3px solid #ff8c00;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.game-completion h2 {
+    color: #ff4500;
+    font-size: 1.8em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+}

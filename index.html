@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Game Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>Video Game Simulator</h1>
+        <div id="character-info">
+            <p>Character Level: <span id="character-level">1</span></p>
+            <div id="xp-bar-container">
+                <div id="xp-bar"></div>
+                <div id="so-close-overlay" class="hidden">SO CLOSE!</div>
+            </div>
+            <p>XP: <span id="current-xp">0</span> / <span id="xp-to-next-level">100</span></p>
+            <p>Skill Points: <span id="skill-points">0</span></p>
+        </div>
+        <div id="start-screen">
+            <button id="play-button">Play Level 1</button>
+        </div>
+        <div id="result-screen" class="hidden">
+            <div id="result-text"></div>
+            <button id="next-level-button" class="hidden">Play Level 2</button>
+        </div>
+    </div>
+    <div id="skill-tree-container">
+        <h2>Skill Tree</h2>
+        <div id="skill-tree">
+            <div class="skill-branch" id="speed-branch">
+                <h3>Speed</h3>
+                <div class="skill-list"></div>
+            </div>
+            <div class="skill-branch" id="agility-branch">
+                <h3>Agility</h3>
+                <div class="skill-list"></div>
+            </div>
+            <div class="skill-branch" id="glitches-branch">
+                <h3>Glitches</h3>
+                <div class="skill-list"></div>
+            </div>
+            <div class="skill-branch" id="combat-branch">
+                <h3>Combat</h3>
+                <div class="skill-list"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
